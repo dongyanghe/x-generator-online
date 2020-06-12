@@ -35,7 +35,8 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
-
+//  ngant
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 export function setupGitConfiguration(gitConfigurationService: GitConfigurationService): any {
   return () => gitConfigurationService.setupGitConfiguration();
 }
@@ -49,7 +50,8 @@ export function setupGitConfiguration(gitConfigurationService: GitConfigurationS
     // jhipster-needle-angular-add-module JHipster will add new module here
     JhonlineEntityModule,
     NgxEchartsModule,
-    JhonlineAppRoutingModule
+    JhonlineAppRoutingModule,
+    NgZorroAntdModule.forRoot()
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
   providers: [

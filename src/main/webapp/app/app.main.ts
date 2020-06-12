@@ -1,4 +1,21 @@
 /**
+ * 　　┏┓　  ┏┓
+ * 　　┏┛┻━━━┛┻┓
+ * 　　┃　　　　┃
+ * 　　┃　　　━　　　┃
+ * 　　┃　┳┛　┗┳　┃
+ * 　　┃　　　　　　　┃
+ * 　　┃　　　┻　　　┃
+ * 　　┃　　　　　　　┃
+ * 　　┗━┓　　　┏━┛Code is far away from bug with the animal protecting
+ * 　　　　┃　　　┃    神兽保佑,代码无bug
+ * 　　　　┃　　　┃
+ * 　　　　┃　　　┗━━━┓
+ * 　　　　┃　　　　　　　┣┓
+ * 　　　　┃　　　　　　　┏┛
+ * 　　　　┗┓┓┏━┳┓┏┛`
+ * 　　　　　┃┫┫　┃┫┫
+ * 　　　　　┗┻┛　┗┻┛
  * Copyright 2017-2020 the original author or authors from the JHipster Online project.
  *
  * This file is part of the JHipster Online project, see https://github.com/jhipster/jhipster-online

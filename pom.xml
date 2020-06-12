@@ -617,7 +617,7 @@
                         <changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
                         <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
                         <driver>com.mysql.cj.jdbc.Driver</driver>
-                        <url>jdbc:mysql://localhost:3306/jhipster-online</url>
+                        <url>jdbc:mysql://192.210.171.118:3306/jhipster-online</url>
                         <defaultSchemaName>jhipster-online</defaultSchemaName>
                         <username>root</username>
                         <password></password>
@@ -938,6 +938,8 @@
                                 <configuration>
                                     <nodeVersion>${node.version}</nodeVersion>
                                     <yarnVersion>${yarn.version}</yarnVersion>
+                                    <nodeDownloadRoot>http://nodejs.org/dist/</nodeDownloadRoot>
+                                    <yarnDownloadRoot>http://github.com/yarnpkg/yarn/releases/download/</yarnDownloadRoot>
                                 </configuration>
                             </execution>
                             <execution>
@@ -945,6 +947,9 @@
                                 <goals>
                                     <goal>yarn</goal>
                                 </goals>
+                                <configuration>
+                                    <arguments>config set registry https://registry.npm.taobao.org</arguments>
+                                </configuration>
                             </execution>
                             <execution>
                                 <id>webpack build dev</id>
@@ -1033,6 +1038,8 @@
                                 <configuration>
                                     <nodeVersion>${node.version}</nodeVersion>
                                     <yarnVersion>${yarn.version}</yarnVersion>
+                                    <nodeDownloadRoot>http://nodejs.org/dist/</nodeDownloadRoot>
+                                    <yarnDownloadRoot>http://github.com/yarnpkg/yarn/releases/download/</yarnDownloadRoot>
                                 </configuration>
                             </execution>
                             <execution>
@@ -1042,6 +1049,7 @@
                                 </goals>
                                 <configuration>
                                     <arguments>install</arguments>
+                                    <arguments>config set registry https://registry.npm.taobao.org</arguments>
                                 </configuration>
                             </execution>
                             <execution>
@@ -1130,6 +1138,8 @@
                                 <configuration>
                                     <nodeVersion>${node.version}</nodeVersion>
                                     <yarnVersion>${yarn.version}</yarnVersion>
+                                    <nodeDownloadRoot>http://nodejs.org/dist/</nodeDownloadRoot>
+                                    <yarnDownloadRoot>http://github.com/yarnpkg/yarn/releases/download/</yarnDownloadRoot>
                                 </configuration>
                             </execution>
                             <execution>
@@ -1139,6 +1149,7 @@
                                 </goals>
                                 <configuration>
                                     <arguments>install</arguments>
+                                    <arguments>config set registry https://registry.npm.taobao.org</arguments>
                                 </configuration>
                             </execution>
                             <execution>

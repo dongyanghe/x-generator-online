@@ -1,9 +1,9 @@
 <form #generatorForm="ngForm">
 
-    <h2><fa-icon [icon]="'rocket'"></fa-icon>&nbsp;<span>Application generation</span></h2>
+    <h2><fa-icon [icon]="'rocket'"></fa-icon>&nbsp;<span>应用生成</span></h2>
 
     <div class="container">
-        <h4>Project configuration</h4>
+        <h4>应用配置</h4>
         <hr />
         <jhi-git-provider-alert [tab]="'generate-application'"></jhi-git-provider-alert>
         <jhi-git-provider (sharedData)="updateSharedData($event)" [simpleMode]="true"></jhi-git-provider>

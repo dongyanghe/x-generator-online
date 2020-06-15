@@ -12,6 +12,7 @@
     "node_modules"
   ],
   "dependencies": {
+    "@angular/animations": "^9.1.11",
     "@angular/common": "9.0.4",
     "@angular/compiler": "9.0.4",
     "@angular/core": "9.0.4",

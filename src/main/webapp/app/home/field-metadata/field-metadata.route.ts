@@ -20,34 +20,34 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 
-import { JdlMetadataComponent } from './jdl-metadata.component';
-import { ApplyJdlStudioComponent, DeleteJdlStudioComponent } from './jdl-studio.component';
+import { FieldMetadataComponent } from './field-metadata.component';
+import { ApplyFieldStudioComponent, DeleteFieldStudioComponent } from './field-studio.component';
 
-export const jdlMetadataRoute: Routes = [
+export const fieldMetadataRoute: Routes = [
   {
-    path: 'design-entities',
-    component: JdlMetadataComponent,
+    path: 'design-field',
+    component: FieldMetadataComponent,
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: '设计JDL实体'
+      pageTitle: '设计字段'
     },
     canActivate: [UserRouteAccessService]
   },
   {
-    path: 'design-entities-delete/:jdlId',
-    component: DeleteJdlStudioComponent,
+    path: 'design-field-delete/:fieldId',
+    component: DeleteFieldStudioComponent,
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: '删除 JDL'
+      pageTitle: '删除 字段'
     },
     canActivate: [UserRouteAccessService]
   },
   {
-    path: 'design-entities-apply/:jdlId',
-    component: ApplyJdlStudioComponent,
+    path: 'design-field-apply/:fieldId',
+    component: ApplyFieldStudioComponent,
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: '应用 JDL'
+      pageTitle: '应用 字段'
     },
     canActivate: [UserRouteAccessService]
   }

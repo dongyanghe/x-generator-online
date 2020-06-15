@@ -18,7 +18,10 @@
  */
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationEnd, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { NgxEchartsModule } from 'ngx-echarts';
 import './vendor';
 import { JhonlineSharedModule } from 'app/shared/shared.module';
@@ -37,6 +40,12 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
 //  ngant
 import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+// eslint-disable-next-line @typescript-eslint/camelcase
+import { zh_CN } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import zh from '@angular/common/locales/zh';
+registerLocaleData(zh);
 export function setupGitConfiguration(gitConfigurationService: GitConfigurationService): any {
   return () => gitConfigurationService.setupGitConfiguration();
 }
@@ -51,7 +60,10 @@ export function setupGitConfiguration(gitConfigurationService: GitConfigurationS
     JhonlineEntityModule,
     NgxEchartsModule,
     JhonlineAppRoutingModule,
-    NgZorroAntdModule.forRoot()
+    NgZorroAntdModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
   providers: [
@@ -61,7 +73,9 @@ export function setupGitConfiguration(gitConfigurationService: GitConfigurationS
       useFactory: setupGitConfiguration,
       deps: [GitConfigurationService],
       multi: true
-    }
+    },
+    // eslint-disable-next-line @typescript-eslint/camelcase
+    { provide: NZ_I18N, useValue: zh_CN }
   ],
   bootstrap: [MainComponent]
 })

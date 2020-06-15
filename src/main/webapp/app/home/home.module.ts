@@ -27,6 +27,9 @@ import { GeneratorOutputDialogComponent } from './generator/generator.output.com
 import { JdlMetadataComponent } from './jdl-metadata/jdl-metadata.component';
 import { ApplyJdlStudioComponent, DeleteJdlStudioComponent } from './jdl-metadata/jdl-studio.component';
 import { JdlOutputDialogComponent } from './jdl-metadata/jdl.output.component';
+import { FieldMetadataComponent } from './field-metadata/field-metadata.component';
+import { ApplyFieldStudioComponent, DeleteFieldStudioComponent } from './field-metadata/field-studio.component';
+import { FieldOutputDialogComponent } from './field-metadata/field.output.component';
 import { CiCdComponent } from './ci-cd/ci-cd.component';
 import { CiCdOutputDialogComponent } from './ci-cd/ci-cd.output.component';
 import { RemoveGeneratorDialogComponent } from './your-generators/remove-generator-dialog.component';
@@ -50,6 +53,10 @@ import { DataDeletionDialogComponent } from 'app/home/your-generators/data-delet
     DeleteJdlStudioComponent,
     ApplyJdlStudioComponent,
     JdlOutputDialogComponent,
+    FieldMetadataComponent,
+    DeleteFieldStudioComponent,
+    ApplyFieldStudioComponent,
+    FieldOutputDialogComponent,
     CiCdComponent,
     YourGeneratorsComponent,
     CiCdOutputDialogComponent,
@@ -59,6 +66,7 @@ import { DataDeletionDialogComponent } from 'app/home/your-generators/data-delet
   entryComponents: [
     GeneratorOutputDialogComponent,
     JdlOutputDialogComponent,
+    FieldOutputDialogComponent,
     CiCdOutputDialogComponent,
     RemoveGeneratorDialogComponent,
     DataDeletionDialogComponent

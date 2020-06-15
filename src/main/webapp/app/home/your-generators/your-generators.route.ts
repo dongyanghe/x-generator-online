@@ -57,7 +57,7 @@ export const YourGeneratorsDialogueRoutes: Routes = [
     component: DataDeletionDialogComponent,
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'Delete all user statistics'
+      pageTitle: '删除所有统计信息'
     },
     canActivate: [UserRouteAccessService],
     outlet: 'popup'

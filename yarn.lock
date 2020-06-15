@@ -30,6 +30,11 @@
     ora "4.0.2"
     rxjs "6.5.3"
 
+"@angular/animations@^9.1.11":
+  version "9.1.11"
+  resolved "http://192.168.1.211:8082/nexus/content/groups/npm-group-2/@angular/animations/-/animations-9.1.11.tgz#2c7b6e584df0ba0884d05f01fa7ab86c1fdd1c5e"
+  integrity sha512-VKAExUnEJfo1PDQKagpx2pn+QMZCsPLRiADzTdl4U0VPylK3ALbn4ZNY9UbdwyE2plitz++LkH7sEGGfh+PNrQ==
+
 "@angular/cdk@^9.0.0":
   version "9.2.4"
   resolved "http://192.168.1.211:8082/nexus/content/groups/npm-group-2/@angular/cdk/-/cdk-9.2.4.tgz#8413958bd275e4c34be3b96f56444671dd30ba93"

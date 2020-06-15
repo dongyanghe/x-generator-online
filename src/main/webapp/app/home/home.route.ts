@@ -25,6 +25,7 @@ import { GIT_ROUTE } from 'app/home/git/git.route';
 import { WELCOME_ROUTE } from 'app/home/welcome/welcome.route';
 import { GITHUB_CALLBACK_ROUTE } from 'app/home/git/callback/callback.route';
 import { jdlMetadataRoute } from 'app/home/jdl-metadata/jdl-metadata.route';
+import { fieldMetadataRoute } from 'app/home/field-metadata/field-metadata.route';
 import { CI_CD_OUTPUT_ROUTE, CI_CD_ROUTE } from 'app/home/ci-cd/ci-cd.route';
 import { YourGeneratorsRoute, YourGeneratorsDialogueRoutes } from 'app/home/your-generators/your-generators.route';
 
@@ -45,6 +46,7 @@ export const HOME_ROUTE: Route = {
     YourGeneratorsRoute,
     ...YourGeneratorsDialogueRoutes,
     CI_CD_OUTPUT_ROUTE,
-    ...jdlMetadataRoute
+    ...jdlMetadataRoute,
+    ...fieldMetadataRoute
   ]
 };

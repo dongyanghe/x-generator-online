@@ -1,0 +1,63 @@
+@charset "UTF-8";
+@import 'sass/global/colors';
+/**************************************fontawesome 字体图标***********************************************/
+.fa {
+  font-size: 14px;
+}
+/*******************************************解决angular初始化时闪烁***************************************/
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak,
+.ng-hide {
+  display: none !important;
+}
+ng\:form {
+  display: block;
+}
+.ng-animate-start {
+  clip: rect(0, auto, auto, 0);
+  -ms-zoom: 1.0001;
+}
+.ng-animate-active {
+  clip: rect(-1px, auto, auto, 0);
+  -ms-zoom: 1;
+}
+/*******************************************下拉多选***************************************/
+
+/**************************************ant-form***********************************************/
+//  动态表单dynamic-form.component对ant表单默认样式的修改
+.form-card-template {
+}
+/**************************************ant-time-picker***********************************************/
+.form-control-template .ant-form-item .ant-form-item-control-wrapper .ant-form-item-control input.ant-calendar-picker-input[readonly] {
+  border-style: solid;
+}
+/**************************************ant-menu***********************************************/
+nz-header {
+  box-shadow: 0 2px 5px 0 rgba(119, 119, 119, 0.3);
+}
+/**************************************ant-menu***********************************************/
+nz-sider {
+  box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.3);
+}
+//  侧边菜单栏
+.ant-menu-vertical.ant-menu-inline-collapsed > .ant-menu-item .fa,
+.ant-menu-inline-collapsed > .ant-menu-item .fa,
+.ant-menu-vertical.ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title .fa,
+.ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title .fa {
+  font-size: 16px;
+  line-height: 42px;
+  margin: 0;
+}
+.ant-menu-inline .ant-menu-item {
+  font-size: 15px !important;
+}
+/**************************************ant-select***********************************************/
+//  展开后的下拉列表父级DIV
+.ant-select-dropdown {
+  border-radius: 0px;
+}
+/*************************************ant modal***********************************/

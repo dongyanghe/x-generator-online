@@ -16,89 +16,53 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ViewChild, OnDestroy, OnInit } from '@angular/core';
 import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
-
-import { FieldMetadata } from './field-metadata.model';
-import { FieldMetadataService } from './field-metadata.service';
+// import { FieldMetadata } from './field-metadata.model';
+// import { FieldMetadataService } from './field-metadata.service';
 import { AccountService } from 'app/core/auth/account.service';
-import { Subscription } from 'rxjs';
+import { STColumn, STComponent } from '@delon/abc/st';
+import { SFSchema } from '@delon/form';
+import { _HttpClient } from '@delon/theme';
 
 @Component({
   selector: 'jhi-field-metadata',
   templateUrl: './field-metadata.component.html'
 })
-export class FieldMetadataComponent implements OnInit, OnDestroy {
-  fieldMetadata: FieldMetadata[] | undefined;
-  currentAccount: any;
-  eventSubscriber: Subscription | undefined;
-  jdlRefresh = false;
-  predicate: string;
-  ascending: boolean;
+// implements OnInit, OnDestroy
+export class FieldMetadataComponent {
+  params: any = {};
+  url = `/user`;
+  @ViewChild('st', { static: true })
+  st!: STComponent;
+  searchSchema: SFSchema = {
+    properties: {
+      no: {
+        type: 'string',
+        title: '编号'
+      }
+    }
+  };
+  columns: STColumn[] = [
+    { title: '编号', index: 'no' },
+    { title: '调用次数', type: 'number', index: 'callNo' },
+    { title: '头像', type: 'img', width: '50px', index: 'avatar' },
+    { title: '时间', type: 'date', index: 'updatedAt' }
+  ];
 
   constructor(
-    private fieldMetadataService: FieldMetadataService,
+    // private fieldMetadataService: FieldMetadataService,
     private alertService: JhiAlertService,
     private eventManager: JhiEventManager,
-    private accountService: AccountService
-  ) {
-    this.predicate = 'name';
-    this.ascending = true;
-  }
+    private accountService: AccountService,
+    private http: _HttpClient
+  ) {}
 
-  loadAll(): void {
-    this.jdlRefresh = true;
-    this.fieldMetadataService
-      .query({
-        sort: this.sort()
-      })
-      .subscribe(
-        (res: any) => {
-          this.fieldMetadata = res;
-          this.jdlRefresh = false;
-        },
-        (res: any) => {
-          this.onError(res.json);
-          this.jdlRefresh = false;
-        }
-      );
-  }
+  // ngOnInit(): void {
+  //   console.log('ngOnInit')
+  // }
 
-  ngOnInit(): void {
-    this.loadAll();
-    this.accountService.identity().subscribe(account => {
-      this.currentAccount = account;
-    });
-    this.registerChangeInJdlMetadata();
-  }
-
-  ngOnDestroy(): void {
-    if (this.eventSubscriber) {
-      this.eventManager.destroy(this.eventSubscriber);
-    }
-  }
-
-  trackId(index: number, item: FieldMetadata): any {
-    return item.id;
-  }
-
-  registerChangeInJdlMetadata(): void {
-    this.eventSubscriber = this.eventManager.subscribe('jdlMetadataListModification', () => this.loadAll());
-  }
-
-  sort(): string[] {
-    return [this.predicate + ',' + (this.ascending ? 'asc' : 'desc')];
-  }
-
-  getSortingIcon(fieldName: string): 'sort' | 'sort-up' | 'sort-down' {
-    if (fieldName === this.predicate) {
-      return this.ascending ? 'sort-up' : 'sort-down';
-    } else {
-      return 'sort';
-    }
-  }
-
-  private onError(error: any): void {
-    this.alertService.error(error.message, null, undefined);
-  }
+  // ngOnDestroy(): void {
+  //   console.log('ngOnDestroy')
+  // }
 }

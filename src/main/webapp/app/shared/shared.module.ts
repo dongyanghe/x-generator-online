@@ -24,10 +24,46 @@ import { LoginModalComponent } from './login/login.component';
 import { JhiGitProviderAlertComponent, JhiGitProviderComponent } from './git-provider/git-provider.component';
 import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DelonACLModule } from '@delon/acl';
+import { DelonFormModule } from '@delon/form';
+import { AlainThemeModule } from '@delon/theme';
+import { TranslateModule } from '@ngx-translate/core';
 
+import { SHARED_DELON_MODULES } from './shared-delon.module';
+import { SHARED_ZORRO_MODULES } from './shared-zorro.module';
+
+// #region third libs
+import { CountdownModule } from 'ngx-countdown';
+import { NgxTinymceModule } from 'ngx-tinymce';
+import { UEditorModule } from 'ngx-ueditor';
+
+const THIRDMODULES = [CountdownModule, UEditorModule, NgxTinymceModule];
+// #endregion
+
+// #region your componets & directives
+const COMPONENTS: never[] = [];
+const DIRECTIVES: never[] = [];
 @NgModule({
-  imports: [JhonlineSharedLibsModule, RouterModule],
+  imports: [
+    JhonlineSharedLibsModule,
+    RouterModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AlainThemeModule.forChild(),
+    DelonACLModule,
+    DelonFormModule,
+    ...SHARED_DELON_MODULES,
+    ...SHARED_ZORRO_MODULES,
+    // third libs
+    ...THIRDMODULES
+  ],
   declarations: [
+    // your components
+    ...COMPONENTS,
+    ...DIRECTIVES,
     AlertComponent,
     AlertErrorComponent,
     LoginModalComponent,
@@ -43,7 +79,22 @@ import { RouterModule } from '@angular/router';
     LoginModalComponent,
     HasAnyAuthorityDirective,
     JhiGitProviderComponent,
-    JhiGitProviderAlertComponent
+    JhiGitProviderAlertComponent,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    AlainThemeModule,
+    DelonACLModule,
+    DelonFormModule,
+    TranslateModule,
+    ...SHARED_DELON_MODULES,
+    ...SHARED_ZORRO_MODULES,
+    // third libs
+    ...THIRDMODULES,
+    // your components
+    ...COMPONENTS,
+    ...DIRECTIVES
   ]
 })
 export class JhonlineSharedModule {}

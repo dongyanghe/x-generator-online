@@ -26,7 +26,6 @@ export class DynamicFormComponent implements OnInit {
   @Input() msg?: String;
   @Input() msgLink?: String;
   selectedColumn: any;
-  private isHidden: boolean = true;
   VALIDATION: any = VALIDATION;
   constructor(public nzModalService: NzModalService, httpService: HttpService) {}
   ngOnInit(): void {
@@ -39,9 +38,9 @@ export class DynamicFormComponent implements OnInit {
       msg = VALIDATION[validationStr].label;
     } else {
       const regExpList = validationStr.split('_');
-      if (regExpList[0] == 'float') {
-        let m: any = regExpList.length > 1 ? '最多' + regExpList[1] : '任意';
-        let n: any = regExpList.length > 2 ? '最多' + regExpList[2] : '任意';
+      if (regExpList[0] === 'float') {
+        const m: any = regExpList.length > 1 ? '最多' + regExpList[1] : '任意';
+        const n: any = regExpList.length > 2 ? '最多' + regExpList[2] : '任意';
         // m = m > 1 ? (m - 1) : 0;
         // n = n > 0 ? n : 0;
 

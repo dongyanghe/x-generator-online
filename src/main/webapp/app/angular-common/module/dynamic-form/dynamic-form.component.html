@@ -85,60 +85,43 @@
       </div>
       <!--可编辑表单 -->
       <ng-container [ngSwitch]="formControl.controlType">
-        <div *ngIf="!formControl.readonly || formControl.controlType == 'editDynamicTable' || formControl.controlType == 'select-class'"
+        <nz-form-control *ngIf="!formControl.readonly || formControl.controlType == 'editDynamicTable' || formControl.controlType == 'select-class'"
              nz-col [nzXs]="formControl.formItemColSize.formControl.xs || 24"
              [nzSm]="formControl.formItemColSize.formControl.sm || 14"
              [nzMd]="formControl.formItemColSize.formControl.md || 14"
              [nzLg]="formControl.formItemColSize.formControl.lg || 14"
              [nzXl]="formControl.formItemColSize.formControl.xl || 14"
-             nz-form-control nzHasFeedback [nzValidateStatus]="formGroup.get(formControl.keyList)">
+             nzHasFeedback [nzValidateStatus]="formGroup.get(formControl.keyList)">
           <!--[nzValidateStatus]="formService.getControl(formGroup,formControl.keyList)"-->
-          <input nz-input  *ngSwitchCase="'textbox'"
+          <input nz-input *ngSwitchCase="'textbox'"
                     formControlName="{{formControl.key}}"
                     [type]="formControl.type == 'number' ? 'text' : formControl.type"
                     [nzSize]="'large'"
-                    [placeHolder]="formControl.placeholder"
+                    [placeholder]="formControl.placeholder"
                     [readonly]="formControl.readonly"
                     [disabled]="formControl.disabled"
                     [ngModel]="formControl.value"
-                    [id]="formControl.key"
-                    [nzAutosize]="formControl.nzAutosize"
-                    [nzRows]="formControl.nzRows"/>
+                    [id]="formControl.key"/>
           <input nz-input  *ngSwitchCase="'textgroup'"
                     formControlName="{{formControl.key}}"
                     [type]="'text'"
                     [nzSize]="'large'"
-                    [placeHolder]="formControl.placeholder"
+                    [placeholder]="formControl.placeholder"
                     [readonly]="formControl.readonly"
                     [disabled]="formControl.disabled"
                     [ngModel]="formControl.value"
-                    [id]="formControl.key">
-            <ng-template *ngIf="formControl.beforeWord"  #addOnBefore >{{formControl.beforeWord}} </ng-template>
-            <ng-template *ngIf="formControl.afterWord" #addOnAfter>{{formControl.afterWord}}</ng-template>
-            <ng-template *ngIf="formControl.beforeSelect" #addOnBefore>
-              <nz-select style="width: 80px;" >
-                <nz-option *ngFor="let data of formControl.beforeSelect" [nzLabel]="data.label" [nzValue]="data.value"></nz-option>
-              </nz-select>
-            </ng-template>
-            <ng-template *ngIf="formControl.afterSelect" #addOnAfter>
-              <nz-select  style="width: 70px;" >
-                <nz-option *ngFor="let data of formControl.afterSelect" [nzLabel]="data.label" [nzValue]="data.value"></nz-option>
-              </nz-select>
-            </ng-template>
-            <ng-template *ngIf="formControl.beforeIcon" #addOnBefore><i class="{{formControl.beforeIcon}}" ></i></ng-template>
-            <ng-template *ngIf="formControl.afterIcon" #addOnAfter><i (click)="formControl.onAfterClick()" class="{{formControl.afterIcon}}"></i></ng-template>
-          </nz-input>
+                    [id]="formControl.key"/>
           <nz-select *ngSwitchCase="'select'" formControlName="{{formControl.key}}" [nzSize]="'large'"
                      [disabled]="formControl.disabled"
-                     [nzShowSearch]="true" [nzMode]="formControl.nzmode" [placeHolder]="formControl.placeholder" nzNotFoundContent="没有选项。。。"
+                     [nzShowSearch]="true" [nzMode]="formControl.nzmode" [nzPlaceHolder]="formControl.placeholder" nzNotFoundContent="没有选项。。。"
                      nzAllowClear>
             <nz-option *ngFor="let data of formControl.dataList" [nzLabel]="data[formControl.labelKey]" [nzValue]="data[formControl.valueKey]"
-                       [disabled]="data.disabled"></nz-option>
+                       [nzDisabled]="data.disabled"></nz-option>
           </nz-select>
 
           <div *ngSwitchCase="'checkbox'">
-            <p-checkbox *ngFor="let data of formControl.dataList" value="{{data.value}}" label="{{data.label}}"
-                        [formControlName]="formControl.key"></p-checkbox>
+            <label nz-checkbox *ngFor="let data of formControl.dataList" [nzValue]="data.value"
+                        [formControlName]="formControl.key">{{data.label}}</label>
           </div>
 
           <div *ngSwitchCase="'radio'">
@@ -158,36 +141,37 @@
 
           <img *ngSwitchCase="'image'" src="{{formControl.src}}">
 
-          <nz-datepicker style="width:100%" *ngSwitchCase="'datepicker'" formControlName="{{formControl.key}}"
+          <nz-date-picker style="width:100%" *ngSwitchCase="'datepicker'" formControlName="{{formControl.key}}"
                          [ngModel]="formControl.value"
                          [nzMode]="formControl.mode"
                          [nzShowTime]="formControl.showTime"
                          [nzAllowClear]="!formControl.required"
-                         [placeHolder]="formControl.placeholder"
+                         [nzPlaceHolder]="formControl.placeholder"
                          [disabled]="formControl.disabled"
                          [nzFormat]="formControl.format"
-                         [nzDisabledDate]="disabledDate"
+                         [nzDisabledDate]="formControl.disabledDate"
           >
-          </nz-datepicker>
+          </nz-date-picker>
 
-          <nz-rangepicker *ngSwitchCase= "'rangepicker'" formControlName="{{formControl.key}}"
+          <nz-range-picker *ngSwitchCase= "'rangepicker'" formControlName="{{formControl.key}}"
                           [ngModel]="formControl.value"
                           [nzShowTime]="formControl.showTime"
                           [nzAllowClear]="!formControl.required"
-                          [nzPlaceholder]="formControl.placeholders"
+                          [nzPlaceHolder]="formControl.placeholders"
                           [disabled]="formControl.disabled"
                           [nzFormat]="formControl.format"
-                          [nzDisabledDate]="disabledDate">
-          </nz-rangepicker>
+                          [nzDisabledDate]="formControl.disabledDate">
+          </nz-range-picker>
 
-          <nz-timepicker *ngSwitchCase= "'timepicker'" formControlName= "{{formControl.key}}"
+          <nz-time-picker *ngSwitchCase= "'timepicker'" formControlName= "{{formControl.key}}"
                          [(ngModel)]="formControl.value"
-                         [placeHolder]= "formControl.placeholder"
+                         [nzPlaceHolder]= "formControl.placeholder"
                          [nzFormat]="formControl.format"
                          [disabled]= "formControl.disabled">
-          </nz-timepicker>
+          </nz-time-picker>
           <!--动态表格-->
-          <nz-table *ngSwitchCase="'editDynamicTable'" class="edit-dynamic-table" #nzTable [nzDataSource]="formGroup.get(formControl.keyList).value"  [nzIsPagination]="false" [nzSize]="'small'">
+          <nz-table *ngSwitchCase="'editDynamicTable'" class="edit-dynamic-table" #nzTable
+            [nzData]="formGroup.get(formControl.keyList).value"  [nzShowPagination]="false" [nzSize]="'small'">
             <thead nz-thead>
             <tr>
               <th *ngFor="let theadCol of formControl.theadColList" nz-th [width]="theadCol.width" title="{{theadCol.title}}" class="padding-2"><span>{{theadCol.label}}</span></th>
@@ -218,25 +202,22 @@
                         formControlName= "{{editDynamicTableCol.formControl.key}}"
                         [type]= "editDynamicTableCol.formControl.type == 'number' ? 'text' : editDynamicTableCol.formControl.type"
                         [nzSize]= "'small'"
-                        [placeHolder]= "editDynamicTableCol.formControl.placeholder"
+                        [placeholder]= "editDynamicTableCol.formControl.placeholder"
                         [disabled]= "editDynamicTableCol.formControl.disabled"
-                        [id]= "editDynamicTableCol.formControl.key"
-                        [nzAutosize]= "editDynamicTableCol.formControl.nzAutosize"
-                        [nzRows]= "editDynamicTableCol.formControl.nzRows">
-              </nz-input>
-              <nz-timepicker *ngSwitchCase= "'timepicker'"
+                        [id]= "editDynamicTableCol.formControl.key"/>
+              <nz-time-picker *ngSwitchCase= "'timepicker'"
                              formControlName= "{{editDynamicTableCol.formControl.key}}"
                              [nzSize]= "'small'"
-                             [placeHolder]= "editDynamicTableCol.formControl.placeholder"
+                             [nzPlaceHolder]= "editDynamicTableCol.formControl.placeholder"
                              [nzFormat]="editDynamicTableCol.formControl.format"
                              [disabled]= "editDynamicTableCol.formControl.disabled">
-              </nz-timepicker>
+              </nz-time-picker>
               <nz-select *ngSwitchCase="'select'" formControlName="{{editDynamicTableCol.formControl.key}}" [nzSize]="'large'"
                          [disabled]="editDynamicTableCol.formControl.disabled"
-                         [nzShowSearch]="true" [placeHolder]="editDynamicTableCol.formControl.placeholder" nzNotFoundContent="没有选项。。。"
+                         [nzShowSearch]="true" [nzPlaceHolder]="editDynamicTableCol.formControl.placeholder" nzNotFoundContent="没有选项。。。"
                          nzAllowClear>
                 <nz-option *ngFor="let data of editDynamicTableCol.formControl.dataList" [nzLabel]="data[formControl.labelKey]" [nzValue]="data[formControl.valueKey]"
-                           [disabled]="data.disabled"></nz-option>
+                           [nzDisabled]="data.disabled"></nz-option>
               </nz-select>
 
               <label *ngSwitchCase= "'singleradio'" nz-radio>
@@ -309,7 +290,7 @@
              && formGroup.get(formControl.keyList).errors && formGroup.get(formControl.keyList).errors[formControl.key]">
           输入类型或格式异常
         </span>
-        </div>
+        </nz-form-control>
       </ng-container>
     </div>
     <!-- careful: *ngIf="!formGroupName"和*ngIf="formGroupName"的内容应保持一致，由于formGroupName和formGroup必须写在以前，所以他们是冗余的  -->
@@ -367,62 +348,43 @@
       </div>
       <!--可编辑表单 -->
       <ng-container [ngSwitch]="formControl.controlType">
-        <div *ngIf="!formControl.readonly || formControl.controlType == 'editDynamicTable' || formControl.controlType == 'select-class'"
+        <nz-form-control *ngIf="!formControl.readonly || formControl.controlType == 'editDynamicTable' || formControl.controlType == 'select-class'"
              nz-col [nzXs]="formControl.formItemColSize.formControl.xs || 24"
              [nzSm]="formControl.formItemColSize.formControl.sm || 14"
              [nzMd]="formControl.formItemColSize.formControl.md || 14"
              [nzLg]="formControl.formItemColSize.formControl.lg || 14"
              [nzXl]="formControl.formItemColSize.formControl.xl || 14"
-             nz-form-control nzHasFeedback [nzValidateStatus]="formGroup.get(formControl.keyList)">
+             nzHasFeedback [nzValidateStatus]="formGroup.get(formControl.keyList)">
           <!--[nzValidateStatus]="formService.getControl(formGroup,formControl.keyList)"-->
           <input nz-input  *ngSwitchCase="'textbox'"
                     formControlName="{{formControl.key}}"
                     [type]="formControl.type == 'number' ? 'text' : formControl.type"
                     [nzSize]="'large'"
-                    [placeHolder]="formControl.placeholder"
+                    [placeholder]="formControl.placeholder"
                     [readonly]="formControl.readonly"
                     [disabled]="formControl.disabled"
                     [ngModel]="formControl.value"
-                    [id]="formControl.key"
-                    [nzAutosize]="formControl.nzAutosize"
-                    [nzRows]="formControl.nzRows">
-
-          </nz-input>
+                    [id]="formControl.key"/>
           <input nz-input  *ngSwitchCase="'textgroup'"
                     formControlName="{{formControl.key}}"
                     [type]="'text'"
                     [nzSize]="'large'"
-                    [placeHolder]="formControl.placeholder"
+                    [placeholder]="formControl.placeholder"
                     [readonly]="formControl.readonly"
                     [disabled]="formControl.disabled"
                     [ngModel]="formControl.value"
-                    [id]="formControl.key">
-            <ng-template *ngIf="formControl.beforeWord"  #addOnBefore >{{formControl.beforeWord}} </ng-template>
-            <ng-template *ngIf="formControl.afterWord" #addOnAfter>{{formControl.afterWord}}</ng-template>
-            <ng-template *ngIf="formControl.beforeSelect" #addOnBefore>
-              <nz-select style="width: 80px;" >
-                <nz-option *ngFor="let data of formControl.beforeSelect" [nzLabel]="data.label" [nzValue]="data.value"></nz-option>
-              </nz-select>
-            </ng-template>
-            <ng-template *ngIf="formControl.afterSelect" #addOnAfter>
-              <nz-select  style="width: 70px;" >
-                <nz-option *ngFor="let data of formControl.afterSelect" [nzLabel]="data.label" [nzValue]="data.value"></nz-option>
-              </nz-select>
-            </ng-template>
-            <ng-template *ngIf="formControl.beforeIcon" #addOnBefore><i class="{{formControl.beforeIcon}}" ></i></ng-template>
-            <ng-template *ngIf="formControl.afterIcon" #addOnAfter><i (click)="formControl.onAfterClick()" class="{{formControl.afterIcon}}"></i></ng-template>
-          </nz-input>
+                    [id]="formControl.key" />
           <nz-select *ngSwitchCase="'select'" formControlName="{{formControl.key}}" [nzSize]="'large'"
                      [disabled]="formControl.disabled"
-                     [nzShowSearch]="true" [nzMode]="formControl.nzmode" [placeHolder]="formControl.placeholder" nzNotFoundContent="没有选项。。。"
+                     [nzShowSearch]="true" [nzMode]="formControl.nzmode" [nzPlaceHolder]="formControl.placeholder" nzNotFoundContent="没有选项。。。"
                      nzAllowClear>
             <nz-option *ngFor="let data of formControl.dataList" [nzLabel]="data[formControl.labelKey]" [nzValue]="data[formControl.valueKey]"
-                       [disabled]="data.disabled"></nz-option>
+                       [nzDisabled]="data.disabled"></nz-option>
           </nz-select>
 
           <div *ngSwitchCase="'checkbox'">
-            <p-checkbox *ngFor="let data of formControl.dataList" value="{{data.value}}" label="{{data.label}}"
-                        [formControlName]="formControl.key"></p-checkbox>
+            <label nz-checkbox *ngFor="let data of formControl.dataList" [nzValue]="data.value" label=""
+                        [formControlName]="formControl.key">{{data.label}}</label>
           </div>
 
           <div *ngSwitchCase="'radio'">
@@ -442,36 +404,37 @@
 
           <img *ngSwitchCase="'image'" src="{{formControl.src}}">
 
-          <nz-datepicker style="width:100%" *ngSwitchCase="'datepicker'" formControlName="{{formControl.key}}"
+          <nz-date-picker style="width:100%" *ngSwitchCase="'datepicker'" formControlName="{{formControl.key}}"
                          [ngModel]="formControl.value"
                          [nzMode]="formControl.mode"
                          [nzShowTime]="formControl.showTime"
                          [nzAllowClear]="!formControl.required"
-                         [placeHolder]="formControl.placeholder"
+                         [nzPlaceHolder]="formControl.placeholder"
                          [disabled]="formControl.disabled"
                          [nzFormat]="formControl.format"
-                         [nzDisabledDate]="disabledDate"
+                         [nzDisabledDate]="formControl.disabledDate"
           >
-          </nz-datepicker>
+          </nz-date-picker>
 
-          <nz-rangepicker *ngSwitchCase= "'rangepicker'" formControlName="{{formControl.key}}"
+          <nz-range-picker *ngSwitchCase= "'rangepicker'" formControlName="{{formControl.key}}"
                           [ngModel]="formControl.value"
                           [nzShowTime]="formControl.showTime"
                           [nzAllowClear]="!formControl.required"
-                          [nzPlaceholder]="formControl.placeholders"
+                          [nzPlaceHolder]="formControl.placeholders"
                           [disabled]="formControl.disabled"
                           [nzFormat]="formControl.format"
-                          [nzDisabledDate]="disabledDate">
-          </nz-rangepicker>
+                          [nzDisabledDate]="formControl.disabledDate">
+          </nz-range-picker>
 
-          <nz-timepicker *ngSwitchCase= "'timepicker'" formControlName= "{{formControl.key}}"
+          <nz-time-picker *ngSwitchCase= "'timepicker'" formControlName= "{{formControl.key}}"
                          [(ngModel)]="formControl.value"
-                         [placeHolder]= "formControl.placeholder"
+                         [nzPlaceHolder]= "formControl.placeholder"
                          [nzFormat]="formControl.format"
                          [disabled]= "formControl.disabled">
-          </nz-timepicker>
+          </nz-time-picker>
           <!--动态表格-->
-          <nz-table *ngSwitchCase="'editDynamicTable'" class="edit-dynamic-table" #nzTable [nzDataSource]="formGroup.get(formControl.keyList).value"  [nzIsPagination]="false" [nzSize]="'small'">
+          <nz-table *ngSwitchCase="'editDynamicTable'" class="edit-dynamic-table" #nzTable
+            [nzData]="formGroup.get(formControl.keyList).value"  [nzShowPagination]="false" [nzSize]="'small'">
             <thead nz-thead>
             <tr>
               <th *ngFor="let theadCol of formControl.theadColList" nz-th [width]="theadCol.width" title="{{theadCol.title}}" class="padding-2"><span>{{theadCol.label}}</span></th>
@@ -502,25 +465,22 @@
                         formControlName= "{{editDynamicTableCol.formControl.key}}"
                         [type]= "editDynamicTableCol.formControl.type == 'number' ? 'text' : editDynamicTableCol.formControl.type"
                         [nzSize]= "'small'"
-                        [placeHolder]= "editDynamicTableCol.formControl.placeholder"
+                        [placeholder]= "editDynamicTableCol.formControl.placeholder"
                         [disabled]= "editDynamicTableCol.formControl.disabled"
-                        [id]= "editDynamicTableCol.formControl.key"
-                        [nzAutosize]= "editDynamicTableCol.formControl.nzAutosize"
-                        [nzRows]= "editDynamicTableCol.formControl.nzRows">
-              </nz-input>
-              <nz-timepicker *ngSwitchCase= "'timepicker'"
+                        [id]= "editDynamicTableCol.formControl.key"/>
+              <nz-time-picker *ngSwitchCase= "'timepicker'"
                              formControlName= "{{editDynamicTableCol.formControl.key}}"
                              [nzSize]= "'small'"
-                             [placeHolder]= "editDynamicTableCol.formControl.placeholder"
+                             [nzPlaceHolder]= "editDynamicTableCol.formControl.placeholder"
                              [nzFormat]="editDynamicTableCol.formControl.format"
                              [disabled]= "editDynamicTableCol.formControl.disabled">
-              </nz-timepicker>
+              </nz-time-picker>
               <nz-select *ngSwitchCase="'select'" formControlName="{{editDynamicTableCol.formControl.key}}" [nzSize]="'large'"
                          [disabled]="editDynamicTableCol.formControl.disabled"
-                         [nzShowSearch]="true" [placeHolder]="editDynamicTableCol.formControl.placeholder" nzNotFoundContent="没有选项。。。"
+                         [nzShowSearch]="true" [nzPlaceHolder]="editDynamicTableCol.formControl.placeholder" nzNotFoundContent="没有选项。。。"
                          nzAllowClear>
                 <nz-option *ngFor="let data of editDynamicTableCol.formControl.dataList" [nzLabel]="data[formControl.labelKey]" [nzValue]="data[formControl.valueKey]"
-                           [disabled]="data.disabled"></nz-option>
+                           [nzDisabled]="data.disabled"></nz-option>
               </nz-select>
 
               <label *ngSwitchCase= "'singleradio'" nz-radio>
@@ -593,7 +553,7 @@
              && formGroup.get(formControl.keyList).errors && formGroup.get(formControl.keyList).errors[formControl.key]">
           输入类型或格式异常
         </span>
-        </div>
+        </nz-form-control>
       </ng-container>
     </div>
   </div>
@@ -633,60 +593,60 @@
     </div>
     <div nz-form-control nz-col [nzXs]="24" [nzMd]="22" [nzSm]="20" [nzXl]="13" >
       <input nz-input  *ngSwitchCase="'textbox'" [type]="formControl.type == 'number' ? 'text' : formControl.type" [nzSize]="'large'" formControlName="{{formControl.key}}"
-        [placeHolder]="formControl.placeholder"/>
-      <input nz-input  *ngSwitchCase="'textgroup'" [type]="'text'" [nzSize]="'large'" formControlName="{{formControl.key}}" [placeHolder]="formControl.placeholder" [readonly]="formControl.readonly"/>
+        [placeholder]="formControl.placeholder"/>
+      <input nz-input  *ngSwitchCase="'textgroup'" [type]="'text'" [nzSize]="'large'" formControlName="{{formControl.key}}" [placeholder]="formControl.placeholder" [readonly]="formControl.readonly"/>
       <ng-container *ngIf="formControl.required">
         <nz-select *ngSwitchCase="'select'" formControlName="{{formControl.key}}" [nzSize]="'large'"
                    [disabled]="formControl.disabled"
-                   [nzShowSearch]="true" [nzMode]="formControl.nzmode" [placeHolder]="formControl.placeholder" nzNotFoundContent="没有选项。。。">
+                   [nzShowSearch]="true" [nzMode]="formControl.nzmode" [nzPlaceHolder]="formControl.placeholder" nzNotFoundContent="没有选项。。。">
           <nz-option *ngFor="let data of formControl.dataList" [nzLabel]="data[formControl.labelKey]" [nzValue]="data[formControl.valueKey]"
-                     [disabled]="data.disabled"></nz-option>
+                     [nzDisabled]="data.disabled"></nz-option>
         </nz-select>
       </ng-container>
       <ng-container *ngIf="!formControl.required">
         <nz-select *ngSwitchCase="'select'" formControlName="{{formControl.key}}" [nzSize]="'large'"
                    [disabled]="formControl.disabled"
-                   [nzShowSearch]="true" [nzMode]="formControl.nzmode" [placeHolder]="formControl.placeholder" nzNotFoundContent="没有选项。。。2"
+                   [nzShowSearch]="true" [nzMode]="formControl.nzmode" [nzPlaceHolder]="formControl.placeholder" nzNotFoundContent="没有选项。。。2"
                    nzAllowClear>
           <nz-option *ngFor="let data of formControl.dataList" [nzLabel]="data[formControl.labelKey]" [nzValue]="data[formControl.valueKey]"
-                     [disabled]="data.disabled"></nz-option>
+                     [nzDisabled]="data.disabled"></nz-option>
         </nz-select>
       </ng-container>
 
-      <nz-datepicker style="width:100%" *ngSwitchCase="'datepicker'" formControlName="{{formControl.key}}"
+      <nz-date-picker style="width:100%" *ngSwitchCase="'datepicker'" formControlName="{{formControl.key}}"
                      [ngModel]="formControl.value"
                      [nzMode]="formControl.mode"
                      [nzShowTime]="formControl.showTime"
                      [nzAllowClear]="!formControl.required"
-                     [placeHolder]="formControl.placeholder"
+                     [nzPlaceHolder]="formControl.placeholder"
                      [nzFormat]="formControl.format"
-                     [nzDisabledDate]="disabledDate"
+                     [nzDisabledDate]="formControl.disabledDate"
       >
-      </nz-datepicker>
+      </nz-date-picker>
 
-      <nz-rangepicker *ngSwitchCase= "'rangepicker'" formControlName="{{formControl.key}}"
+      <nz-range-picker *ngSwitchCase= "'rangepicker'" formControlName="{{formControl.key}}"
                       [ngModel]="formControl.value"
                       [nzShowTime]="formControl.showTime"
                       [nzAllowClear]="!formControl.required"
-                      [nzPlaceholder]="formControl.placeholders"
+                      [nzPlaceHolder]="formControl.placeholders"
                       [nzFormat]="formControl.format"
-                      [nzDisabledDate]="disabledDate">
-      </nz-rangepicker>
+                      [nzDisabledDate]="formControl.disabledDate">
+      </nz-range-picker>
 
-      <nz-timepicker *ngSwitchCase= "'timepicker'" formControlName= "{{formControl.key}}"
+      <nz-time-picker *ngSwitchCase= "'timepicker'" formControlName= "{{formControl.key}}"
                      [(ngModel)]="formControl.value"
-                     [placeHolder]= "formControl.placeholder"
+                     [nzPlaceHolder]= "formControl.placeholder"
                      [nzFormat]="formControl.format">
-      </nz-timepicker>
+      </nz-time-picker>
 
       <div *ngSwitchCase="'checkbox'">
-        <p-checkbox *ngFor="let data of formControl.dataList" value="{{data.value}}" label="{{data.label}}"
-                    [formControlName]="formControl.key"></p-checkbox>
+        <label nz-checkbox *ngFor="let data of formControl.dataList" [nzValue]="data.value" label=""
+          [formControlName]="formControl.key">{{data.label}}</label>
       </div>
 
       <div *ngSwitchCase="'radio'">
-        <p-radioButton *ngFor="let data of formControl.dataList" value="{{data.value}}" label="{{data.label}}"
-                       [formControlName]="formControl.key"></p-radioButton>
+        <label nz-radio *ngFor="let data of formControl.dataList" [nzValue]="data.value"
+                       [formControlName]="formControl.key">{{data.label}}</label>
       </div>
 
       <div *ngSwitchCase="'selectButton'">

@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ValueToLabelPipe, ValueToLabelImpurePipe } from '../pipe/DictPipe';
+import { TranslationDatePipe, TranslationDateImpurePipe } from '../pipe/TranslationDatePipe';
 // import {DpDatePickerModule} from 'ng2-date-picker';
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { ValueToLabelPipe, ValueToLabelImpurePipe } from '../pipe/DictPipe';
     ReactiveFormsModule,
     RouterModule
   ],
-  declarations: [DynamicFormComponent, ValueToLabelPipe, ValueToLabelImpurePipe],
+  declarations: [DynamicFormComponent, ValueToLabelPipe, ValueToLabelImpurePipe, TranslationDatePipe, TranslationDateImpurePipe],
   exports: [DynamicFormComponent],
   providers: []
   // schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

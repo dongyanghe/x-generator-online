@@ -45,6 +45,7 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { zh_CN } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
+import { GlobalConfigModule } from './global-config.module';
 registerLocaleData(zh);
 export function setupGitConfiguration(gitConfigurationService: GitConfigurationService): any {
   return () => gitConfigurationService.setupGitConfiguration();
@@ -63,7 +64,8 @@ export function setupGitConfiguration(gitConfigurationService: GitConfigurationS
     NgZorroAntdModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    GlobalConfigModule.forRoot()
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
   providers: [

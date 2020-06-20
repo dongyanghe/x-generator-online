@@ -1,7 +1,7 @@
 import { FormItemColSize } from './FormItemColSize';
 import { HttpService } from '../../../service/HttpService';
-import { EditDynamicTable } from './index';
-import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
+// import { EditDynamicTable } from './index';
+// import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
 export class FieldBaseOptions {
   type?: string;
   dataList?: Array<any>;
@@ -10,16 +10,16 @@ export class FieldBaseOptions {
 }
 export class FormControlBase<T> {
   value: Array<any> | any;
-  private keys: string;
+  private keys!: string;
   key: string;
-  keyList: Array<string>;
+  keyList!: Array<string>;
   label: string;
   controlType: string;
   controlTypes?: string;
   placeholder: string;
-  required: boolean = false;
-  readonly: boolean = false;
-  disabled: boolean = false;
+  required = false;
+  readonly = false;
+  disabled = false;
   title?: string;
   options?: FieldBaseOptions;
   minlength?: number;
@@ -34,10 +34,10 @@ export class FormControlBase<T> {
     keys: string | Array<string>,
     value: Array<any> | any,
     options?: FieldBaseOptions,
-    required: boolean = false,
-    readonly: boolean = false,
-    disabled: boolean = false,
-    validation: string = '',
+    required = false,
+    readonly = false,
+    disabled = false,
+    validation = '',
     minlength?: number,
     maxlength?: number,
     title?: string,
@@ -58,7 +58,7 @@ export class FormControlBase<T> {
     this.options = options;
     this.formItemColSize = formItemColSize;
     //  设置本组件formGroup的key和父级的key
-    if (typeof keys == 'string') {
+    if (typeof keys === 'string') {
       this.keyList = keys.split('.');
     }
     if (keys instanceof Array) {
